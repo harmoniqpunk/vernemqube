@@ -11,9 +11,9 @@ NOTE: I didn't managed to make the node discovery work with services because of 
 ### How to Use
 
 1. Launch Service
-   - ```kubectl create -f vernemq-deployment.yaml```
-1. Launch Deployment
    - ```kubectl create -f vernemq-service.yaml```
+1. Launch Deployment
+   - ```kubectl create -f vernemq-deployment.yaml```
 
 ### Checking cluster status
 

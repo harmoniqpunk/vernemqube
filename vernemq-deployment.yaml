@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vernemq
+  namespace: default
+  labels:
+    app: broker
+    tier: backend
+spec:
+  # this replicas value is default
+  # modify it according to your case
+  replicas: 3
+  # selector can be applied automatically
+  # from the labels in the pod template if not set
+  selector:
+     matchLabels:
+       app: broker
+       tier: backend
+  template:
+    metadata:
+      labels:
+        app: broker
+        tier: backend
+    spec:
+      containers:
+      - name: vernemq
+        image: georgepoenaru/vernemqube
+        env:
+        - name: KUBE_VERNEMQ_DISCOVERY_URL
+          #Considering namespace = default. Change according  your namespace Eg: kubernetes-pod-ip-finder.dev.svc.cluster.local/?app=broker
+          value: http://kubernetes-pod-ip-finder.default.svc.cluster.local/?app=broker
+        ports:
+        - containerPort: 1883
+          name: mqtt
+        - containerPort: 8080
+          name: websock
+        - containerPort: 44053
+          name: epmd
+        - containerPort: 4369
+          name: data
+        - containerPort: 9100
+        - containerPort: 9101
+        - containerPort: 9102
+        - containerPort: 9103
+        - containerPort: 9104
+        - containerPort: 9105
+        - containerPort: 9106
+        - containerPort: 9107
+        - containerPort: 9108
+        - containerPort: 9109
